@@ -27,7 +27,13 @@
 
 언제 태스크 큐에 들어갈까?
 
-`setTimeout`, `setInterval`, `setImmediate`, `Promise`, `resolve`, `reject`, `async`, `await`, `이벤트리스너의 콜백` 등의 함수들이 들어간다.
+`setTimeout`, `setInterval`, `setImmediate`,
+
+ `Promise` `resolve`, `reject`(`async`, `await`), 
+
+`이벤트리스너의 콜백` 등의 함수들이 들어간다.
+
+
 
 ##### 이벤트 루프의 역할
 
@@ -50,6 +56,8 @@ https://nodejs.org/ko/docs/guides/event-loop-timers-and-nexttick/
 그래서 이벤트 리스너가 작동을 하면서 (HTML줘 - 보통 이런것들을 이벤트리스터에 달린 콜백함수라 부름, 무조건 콜백함수라고해서 태스크 큐로 들어가는것은 아니라고함) 태스크 큐에 콜백함수들이 들어가고 이때 이벤트 루프가 우선순위를 파악해서 호출스택으로 이동시켜 함수들은 호출스택에서 실행이 된다.
 
 이런 흐름을 이벤트 드리븐이라고 한다.
+
+
 
 #### 논 블로킹 I/O
 
