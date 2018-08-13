@@ -73,13 +73,9 @@ https://nodejs.org/ko/docs/guides/event-loop-timers-and-nexttick/
 
 ### 노드 모듈 시스템
 
-
-
 다른 파일의 변수나 함수등을 참조해서 쓰고 싶을때 module.exports로 내보내서 사용할 수 있다.
 
 모듈은 여러 번 재사용될 수 있다.
-
-
 
 ##### var.js
 
@@ -138,9 +134,69 @@ console.log(checkStringOddOrEven('hello'));
 
 ### 노드 내장 객체
 
+- 노드의 전역 객체 - **global** (브라우저에서는 window, 최신 브라우저에서는 global 가능)
+
+  > 전역객체: 어디에서는 접근 가능한 객체,
+  >
+  > global은 전역객체라서 모든 파일들이 공유하므로 require가 필요없다.
+  >
+  > 그리고 누구나 접근 가능하기 때문에 누군가가 메세지를 바꿀수 있어 글로벌에 객체를 직접 대입해서 사용하지 않는게 좋다. 
+
+
+
+
+- **console** 객체
+
+  객체안에 디버깅을 도와주는 많으 메서드가 있음
+
+  - console.time('인자') / console.timeEnd('인자') : 인자가 같아야 함
+  -  console.dir() : 객체를 로깅할때 좋음
+  - console.trace() : 호출 스택을 추적할 수 있음
+  - 등등
+
+- timer 객체 (**setTimeout**, **setInterval**, **setImmediate**)
+
+  - set~ / clear~ (설정/해제)
+  - 이벤트루프로 바로 보내버리고 싶을때 사용
+
+  
+
+- **\__filename, \_\_dirname, process**
+
+  - filename - 해당 파일경로 / dirname - 해당파일이 들어있는 폴더경로
+  - process 객체에는 현재 실행중인 노드 프로그램 정보가 들어있다.
+    - process.execPath : 노드가 설치된 경로
+    - process.cwd() : 노드 프로세스 실행위치
+    -  process.exit() : 프로세스 종료
+    - process.uptime() : 노드 프로그램이 시작되고나서  흐른 시간
+    - 등등
+
+
+
+### 내장 모듈
+
+- os  - 운영체제와 관련된 모듈
+  - os.uptime() / os.hostname() / os.freemem() 등등
+- path - 모든 속성들이 실무에서 많이 쓰여서 중요함!
+  - path.sep : 경로 구분자
+  - path.delimiter : 환경변수 구분자
+  - path.dirname : 디렉토리명
+  - path.extname : 확장자명
+  - path.basename: 파일명
+  - path.parse : 해당 경로를 구성요소로 쪼개줌
+  - path.format : 파싱했던 객체를 합쳐줌
+  - path.normalize : 경로를 알아서 제대로 만들어줌
+  - path.isAbsolute : 절대경로인지 상대경로인지
+  - path.relative : 경로인자를 넣어주면 첫번째 인자에서 두번쨰 경로를 가는 상대경로를 보여줌
+  - path.join : 조각나 있는 경로들을 하나로 합쳐줌 ( 절대경로 무시하고 합침)
+  - path.resolve : 절대 경로 고려하고 합침
+
+
+
+### URL 모듈
 
 
 
 
 
-
+ 
