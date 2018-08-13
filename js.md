@@ -325,5 +325,58 @@ Promise.all([Users.findOne(), Users.remove(), Users.update()])
 
 
 
+
+
 #### async / await
+
+promise는 함수가 실행되는 순서를 보장해주지 않음
+
+`* yield` 는 눈속임으로 순서대로 실행되는 것 처럼 보이게 하는 애
+
+ES2017에서 async / await이 정식 스펙으로 등록되었음
+
+```javascript
+//// Promise 사용
+
+Users.findOne('dahye')
+    .then((user) => {
+      console.log(user);
+      return Users.update('dahye', 'dahlia');
+})
+    .then((updatedUser) => {
+      console.log(updatedUser);
+      return Users.remove('dahlia');
+})
+    .then((removedUser) => {
+      console.log(removeUser);
+})
+    .catch((err) => {
+      console.error(error);
+});
+console.log('다 찾았니?'); 
+
+
+//// async/await 사용
+async func() => {
+    try {
+        const user = await Users.findOne('dahye');
+        console.log(user);
+        const updatedUser = await Users.update('dahye', 'dahlia');
+        console.log(updatedUser);
+        const removedUser = await Users.remove('dahlia');
+        console.log(removedUser);
+        console.log('다 찾았니?');
+    } catch (err) {
+        console.error(err);
+    }
+}
+func()
+
+```
+
+> promise를 사용했을 경우 console.log('다 찾았니?');가 then보다 먼저 실행되는데 async/await의 경우 순서가 보장됨(동기식으로 보이기 때문에 코드 순서와 실행순서가 같음). 하지만 promise 부분의 catch문은 try / catch로 지정해줘야 한다!
+>
+> 그리고 await을 쓰려면 함수앞에 async를 붙여줘야함
+
+
 

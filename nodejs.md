@@ -67,3 +67,80 @@ https://nodejs.org/ko/docs/guides/event-loop-timers-and-nexttick/
 
 > IO(Input/Output) : 파일시스템과 네트워크에서 파일열고쓰고 네트워크 요청 보내고 받고를 의미. 파일시스템은 알아서 멀티쓰레드로 돌림. 자바스크립트는 싱글쓰레드이다. 그래서 노드가 싱글쓰레드인데 이 점을 극복하기 위해 여러프로세스를 만들어 멀티스레드 인것처럼 사용한다고 한다.
 
+ 
+
+
+
+### 노드 모듈 시스템
+
+
+
+다른 파일의 변수나 함수등을 참조해서 쓰고 싶을때 module.exports로 내보내서 사용할 수 있다.
+
+모듈은 여러 번 재사용될 수 있다.
+
+
+
+##### var.js
+
+```js
+const odd = '홀수입니다';
+const even = '짝수입니다';
+
+//다른 파일에서 현재파일을 불러올수 있도록하는 코드(내보냄=module, 여기서는 속성들을 내보냄)
+module.exports = {
+    odd,
+    even,
+};
+```
+
+##### func.js
+
+```javascript
+const {odd, even} = require('./var');
+console.log(odd);
+console.log(even);
+
+function checkOddOrEven(num) {
+    if(num%2) {
+        return odd;
+    }
+    return even;
+}
+
+module.exports = { odd, even };//불러온 속성을 또다른 파일에서 참조할수 있도록 내보낼수도 있고
+module.exports = checkOddOrEven; //함수를 내보낼수도 있다.
+
+```
+
+##### index.js
+
+```js
+const {odd, even} = require('./var');
+const checkNumber = require('./func'); //변수 명을 바꿔서 불러온것.
+
+function checkStringOddOrEven(str) {
+    if(str.length % 2) {
+        return odd;
+    }
+    return even;
+}
+
+console.log(checkNumber(10));
+console.log(checkStringOddOrEven('hello'));
+```
+
+> module.exports === exports
+>
+> exports는 객체 속성만 담을수 있음
+
+
+
+### 노드 내장 객체
+
+
+
+
+
+
+
