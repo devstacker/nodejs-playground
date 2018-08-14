@@ -177,6 +177,7 @@ console.log(checkStringOddOrEven('hello'));
 
 - os  - 운영체제와 관련된 모듈
   - os.uptime() / os.hostname() / os.freemem() 등등
+
 - path - 모든 속성들이 실무에서 많이 쓰여서 중요함!
   - path.sep : 경로 구분자
   - path.delimiter : 환경변수 구분자
@@ -191,49 +192,33 @@ console.log(checkStringOddOrEven('hello'));
   - path.join : 조각나 있는 경로들을 하나로 합쳐줌 ( 절대경로 무시하고 합침)
   - path.resolve : 절대 경로 고려하고 합침
 
+- URL
 
+  ![url-module](/jpg/url-module.jpg)
 
-### URL 모듈
+  > 위쪽은 기존 방식의 주소체계 (url.parse) - 호스트가 없을 때도 쓸수 있음
+  >
+  > 아래는 WHATWG방식의 주소체계(url.URL) - search 부분을 자유자재로 다루기 편리함
 
-![url-module](/Users/Dahye/devstacker/nodejs-playground/url-module.jpg)
+  - `searchParams`의 메서드는 `FormData`나 `URLSearchParams` 객체에도 비슷하게 쓰인다고 함
 
-> 위쪽은 기존 방식의 주소체계 (url.parse) - 호스트가 없을 때도 쓸수 있음
->
-> 아래는 WHATWG방식의 주소체계(url.URL) - search 부분을 자유자재로 다루기 편리함
+- querystring - 기존 방식의 url.parse 와 함께 자주 쓰임
 
+  > whatwg 방식의 url.URL 파싱은 searchParams를 제공하기 때문에 querystring이 필요없음
 
+- crypto 
 
-`searchParams`의 메서드는 `FormData`나 `URLSearchParams` 객체에도 비슷하게 쓰인다고 함
+  - 단방향 암호화 : 암호화만 되고 복호화할수 없는 것
 
+    > 비밀번호는 hash방식으로 암호화해 복호화되지 않는 문자열을 만든다. 암호문(해시)을 저장한 후 사용자의 입력 비밀번호를 암호화한 것과 비교해서 일치하면 로그인이 된다. 그러므로 원래의 비밀번호는 어디에도 저장될 필요가 없다.
 
+    - 충돌 :  똑같은 암호화 해시가 나올 가능성이 존재
+    - 실무에서는 bcrypt, scrypt를 많이 사용
 
-### querystring 모듈
+  - 양방향 암호화 : 복호화도 가능
 
-기존 방식의 url.parse 와 함께 자주 쓰임
+    - createCipher : utf-8 평문을 base64 암호문으로
+    - createDecipher : base64 암호문을 utf 평문으로
 
-> whatwg 방식의 url.URL 파싱은 searchParams를 제공하기 때문에 querystring이 필요없음
+- util
 
-
-
-
-
-### Crypto 모듈
-
-- 단방향 암호화 : 암호화만 되고 복호화할수 없는 것
-
-  > 비밀번호는 hash방식으로 암호화해 복호화되지 않는 문자열을 만든다. 암호문(해시)을 저장한 후 사용자의 입력 비밀번호를 암호화한 것과 비교해서 일치하면 로그인이 된다. 그러므로 원래의 비밀번호는 어디에도 저장될 필요가 없다.
-
-  - 충돌 :  똑같은 암호화 해시가 나올 가능성이 존재
-  - 실무에서는 bcrypt, scrypt를 많이 사용
-
-- 양방향 암호화 : 복호화도 가능
-
-  - createCipher : utf-8 평문을 base64 암호문으로
-
-  - createDecipher : base64 암호문을 utf 평문으로
-
-  
-
-
-
- 
