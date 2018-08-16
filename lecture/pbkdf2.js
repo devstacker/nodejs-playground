@@ -7,7 +7,7 @@ crypto.randomBytes(64, (err, buf) => { //buf에 닮긴 랜덤한 64바이트를 
     console.time('암호화');
     crypto.pbkdf2('dahlia1225', salt, 551395, 64, 'sha512', (err, key) => { //salt는 암호화된 비밀번호와 같이 저장하고 iteration은 1초 정도가 걸릴때까지 올려주면 좋다
         console.log('password', key.toString('base64'));
-        console.timeEnd('암호화');
+    console.timeEnd('암호화');
     });
    
 });
