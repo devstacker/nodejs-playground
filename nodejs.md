@@ -173,12 +173,12 @@ console.log(checkStringOddOrEven('hello'));
 
 
 
-### 내장 모듈
+### 노드 내장 모듈
 
-- os  - 운영체제와 관련된 모듈
+- **os**  - 운영체제와 관련된 모듈
   - os.uptime() / os.hostname() / os.freemem() 등등
 
-- path - 모든 속성들이 실무에서 많이 쓰여서 중요함!
+- **path** - 모든 속성들이 실무에서 많이 쓰여서 중요함!
   - path.sep : 경로 구분자
   - path.delimiter : 환경변수 구분자
   - path.dirname : 디렉토리명
@@ -192,7 +192,7 @@ console.log(checkStringOddOrEven('hello'));
   - path.join : 조각나 있는 경로들을 하나로 합쳐줌 ( 절대경로 무시하고 합침)
   - path.resolve : 절대 경로 고려하고 합침
 
-- URL
+- **url**
 
   ![url-module](/jpg/url-module.jpg)
 
@@ -202,11 +202,11 @@ console.log(checkStringOddOrEven('hello'));
 
   - `searchParams`의 메서드는 `FormData`나 `URLSearchParams` 객체에도 비슷하게 쓰인다고 함
 
-- querystring - 기존 방식의 url.parse 와 함께 자주 쓰임
+- **querystring** - 기존 방식의 url.parse 와 함께 자주 쓰임
 
   > whatwg 방식의 url.URL 파싱은 searchParams를 제공하기 때문에 querystring이 필요없음
 
-- crypto 
+- **crypto** 
 
   - 단방향 암호화 : 암호화만 되고 복호화할수 없는 것
 
@@ -220,5 +220,24 @@ console.log(checkStringOddOrEven('hello'));
     - createCipher : utf-8 평문을 base64 암호문으로
     - createDecipher : base64 암호문을 utf 평문으로
 
-- util
+- **util**
 
+  - deprecate : 지원이 조만간 중된될 메서드임을 알려줄 때 사용
+  - promisify :  promise를 지원하지 않는 (error, data) => {} 꼴의 콜백은 util.promisify로 프로미스로 만들수 있다 (util.callbackify는 다시 콜백함수로 바꿔줌)
+
+- **fs** (file system, 동기와 비동기)
+
+  - fs 메서드들은 뒤에 Sync를 붙이면 동기식으로 작동한다.
+
+    > 하지만 실제로는 비동기방식을 많이쓴다. 만약 파일을 읽는데 시간이 오래걸린다면, 서버가 파일 하나 읽느라 다른 요청들을 처리 할수 없으므로 문제가 될 수 있다. 그렇기 때문에 Sync 메서드들은 잘 쓰지 않고 좀 지저분 하더라도 readFile 메서드를 더 많이 쓴다고 한다.
+    >
+    > 대신 콜백헬이 발생하는것을 막기위해 util.promisify나 node 10에서 새로 지원하는 fs promise를 사용해서 극복한다고 함
+    >
+    > Sync 메서드를 써도 되는 경우는 desktop 프로그램이나 딱 한번만 실행되는 함수, 한번만 블락킹 일어날 수 있는 경우에만 쓰면된다.
+
+  - **버퍼와 스트림**
+
+    -  스트림은 이벤트 기반으로 동작한다. data, end, error.. 버퍼(청크)들이 들어올 때마다 data 이벤트가 발생함
+    - 
+
+ 
