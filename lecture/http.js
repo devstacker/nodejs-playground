@@ -1,8 +1,21 @@
 const http = require('http');
 const fs = require('fs');
 
+// parsing cookies - 지금은 몰라도되는 코드
+const parseCookies = (cookie = '') =>
+    cookie
+        .split(';')
+        .map(v => v.split('='))
+        .map(([k, ...vs]) => [k, vs.join('=')])
+        .reduce((acc, [k, v]) => {
+            acc[k.trim()] = decodeURIComponent(v);
+            return acc;
+        }, {});
+
 const server = http.createServer((req, res) => {
-    console.log('서버실행');
+    console.log(req.url, parseCookies(req.headers.cookie));
+    res.writeHead(200, { 'Set-Cookie':'mycookie=test'} ) //서버에서 클라이언트로 데이터보냄
+    //console.log('서버실행');
     fs.readFile('./server.html', (err, data) => { //버퍼가 data에 담김
         if(err) {
             throw err;
